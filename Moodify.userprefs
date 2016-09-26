@@ -1,8 +1,10 @@
-﻿<Properties StartupConfiguration="{BAB5C659-7716-42C4-B06B-4B67C95A4D4F}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Info.plist">
+﻿<Properties StartupConfiguration="{9F1663A8-B28E-44FA-A6F0-EE93D4BCCB9B}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Moodify/Views/MenuPage.xaml.cs">
     <Files>
-      <File FileName="Moodify/Views/HomePage.xaml.cs" Line="49" Column="50" />
+      <File FileName="Moodify/Views/HomePage.xaml.cs" Line="42" Column="1" />
       <File FileName="iOS/Info.plist" />
+      <File FileName="Moodify/App.cs" Line="28" Column="31" />
+      <File FileName="Moodify/Views/MenuPage.xaml.cs" Line="14" Column="50" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
@@ -11,5 +13,5 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Moodify.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.03a27fb5251b1ff3" />
+  <MonoDevelop.Ide.ItemProperties.Moodify.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Nexus_5_API_22_x86" />
 </Properties>

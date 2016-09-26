@@ -11,6 +11,7 @@ namespace Moodify
 		{
 			BindingContext = new MenuPageViewModel();
 			Title = "Menu";
+			Icon = Device.OS == TargetPlatform.iOS ? "menu.png" : null;
 			InitializeComponent();
 		}
 	}
