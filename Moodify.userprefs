@@ -1,11 +1,12 @@
-﻿<Properties StartupConfiguration="{9F1663A8-B28E-44FA-A6F0-EE93D4BCCB9B}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Moodify/Views/HomePage.xaml.cs">
+﻿<Properties StartupConfiguration="{BAB5C659-7716-42C4-B06B-4B67C95A4D4F}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Info.plist">
     <Files>
       <File FileName="Moodify/Views/HomePage.xaml.cs" Line="49" Column="50" />
+      <File FileName="iOS/Info.plist" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Moodify.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.8EFAC817-6828-4F5E-80FB-B8BF8C1D49BD" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
+  <MonoDevelop.Ide.ItemProperties.Moodify.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.f945fe611ad1a3b55eb7b094d47392b5eecc2036" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
