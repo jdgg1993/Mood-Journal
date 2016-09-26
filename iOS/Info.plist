@@ -46,5 +46,9 @@
 	<string>I need access to your camera so I can analyse your mood.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>I need access to your photo library so I can save your photo.</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
