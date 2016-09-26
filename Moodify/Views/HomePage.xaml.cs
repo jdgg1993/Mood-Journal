@@ -43,7 +43,7 @@ namespace Moodify
 
 			foreach (var type in emotionResults)
 			{
-				EmployeeView.ItemsSource = type.Scores.ToRankedList();
+				EmotionView.ItemsSource = type.Scores.ToRankedList();
 				foreach (var emo in type.Scores.ToRankedList())
 				{
 					System.Diagnostics.Debug.WriteLine(emo.Value);
