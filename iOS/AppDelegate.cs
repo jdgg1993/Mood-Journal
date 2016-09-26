@@ -16,6 +16,8 @@ namespace Moodify.iOS
 
 			LoadApplication(new App());
 
+			UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(33, 150, 243);
+
 			return base.FinishedLaunching(app, options);
 		}
 	}

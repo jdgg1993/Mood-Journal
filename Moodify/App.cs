@@ -24,6 +24,7 @@ namespace Moodify
 		{
 			var menuPage = new MenuPage();
 			NavigationPage = new NavigationPage(new HomePage());
+			NavigationPage.BarTextColor = Color.White;
 			RootPage = new RootPage();
 			RootPage.Master = menuPage;
 			RootPage.Detail = NavigationPage;
