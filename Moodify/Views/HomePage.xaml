@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Moodify.HomePage">
+	<ContentPage.Content>
+		<StackLayout BackgroundColor="White">
+			<Button Text="Take Picture" TextColor="White" BackgroundColor="Green" Clicked="TakePicture_Clicked" />
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="50*" />
+					<RowDefinition Height="50*" />
+				</Grid.RowDefinitions>
+					<ListView x:Name="EmployeeView" HasUnevenRows="True" Grid.Row="0">
+	    				<ListView.ItemTemplate>
+	            			<DataTemplate>
+	                			<ViewCell>
+	                    			<Grid>
+	                        			<Grid.RowDefinitions>
+	                           	 			<RowDefinition Height="Auto" />
+	                        			</Grid.RowDefinitions>
+	                        			<Grid.ColumnDefinitions>
+	                            			<ColumnDefinition Width="50*" />
+	                            			<ColumnDefinition Width="50*" />
+	                        			</Grid.ColumnDefinitions>
+	                        				<Label Grid.Column="0" Text="{Binding Key}"/>
+				                    	    <Label Grid.Column="1" Text="{Binding Value}"/>
+	                    			</Grid>
+	                			</ViewCell>
+	            			</DataTemplate>
+	        			</ListView.ItemTemplate>
+	  				</ListView>
+				<Image x:Name="image" VerticalOptions="Start" Grid.Row="1" />
+			</Grid>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
