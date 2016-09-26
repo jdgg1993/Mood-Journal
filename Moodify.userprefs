@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{9F1663A8-B28E-44FA-A6F0-EE93D4BCCB9B}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Moodify/Views/HomePage.xaml.cs">
     <Files>
       <File FileName="Moodify/Views/HomePage.xaml.cs" Line="49" Column="50" />
     </Files>
