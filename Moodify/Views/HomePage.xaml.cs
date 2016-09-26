@@ -35,19 +35,19 @@ namespace Moodify
 			if (file == null)
 				return;
 
+			UploadingIndicator.IsRunning = true;
+
 			string emotionKey = "88f748eefd944a5d8d337a1765414bba";
 
 			EmotionServiceClient emotionClient = new EmotionServiceClient(emotionKey);
 
 			var emotionResults = await emotionClient.RecognizeAsync(file.GetStream());
 
+			UploadingIndicator.IsRunning = false;
+
 			foreach (var type in emotionResults)
 			{
 				EmotionView.ItemsSource = type.Scores.ToRankedList();
-				foreach (var emo in type.Scores.ToRankedList())
-				{
-					System.Diagnostics.Debug.WriteLine(emo.Value);
-				}
 			}
 
 			image.Source = ImageSource.FromStream(() =>

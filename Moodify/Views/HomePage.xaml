@@ -27,6 +27,7 @@
 	            			</DataTemplate>
 	        			</ListView.ItemTemplate>
 	  				</ListView>
+				<ActivityIndicator x:Name="UploadingIndicator" Color="Red" IsRunning="false" Grid.Row="0" />
 				<Image x:Name="image" VerticalOptions="Start" Grid.Row="1" />
 			</Grid>
 		</StackLayout>
