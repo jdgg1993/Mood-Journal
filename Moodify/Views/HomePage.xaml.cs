@@ -29,7 +29,8 @@ namespace Moodify
 			{
 				DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front,
 				Directory = "Moodify",
-				Name = $"{DateTime.UtcNow}.jpg"
+				Name = $"{DateTime.UtcNow}.jpg",
+				CompressionQuality = 92
 			});
 
 			if (file == null)
