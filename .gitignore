@@ -7,3 +7,6 @@ iOS/bin
 iOS/obj
 Moodify.userprefs
 .vs/
+iOS/app.config
+Moodify/app.config
+Droid/app.config
