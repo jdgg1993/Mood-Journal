@@ -12,3 +12,4 @@ Moodify/app.config
 Droid/app.config
 Droid/Resources/Resource.designer.cs
 Droid/Moodify.Droid.csproj.user
+Droid/Resources/values/google_maps_key.xml
