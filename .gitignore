@@ -7,3 +7,8 @@ iOS/bin
 iOS/obj
 Moodify.userprefs
 .vs/
+iOS/app.config
+Moodify/app.config
+Droid/app.config
+Droid/Resources/Resource.designer.cs
+Droid/Moodify.Droid.csproj.user
