@@ -14,7 +14,9 @@ namespace Moodify.iOS
 		{
 			global::Xamarin.Forms.Forms.Init();
 
-			LoadApplication(new App());
+            global::Xamarin.FormsMaps.Init();
+
+            LoadApplication(new App());
 
 			UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(33, 150, 243);
 
