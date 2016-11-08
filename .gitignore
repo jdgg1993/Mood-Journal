@@ -10,3 +10,5 @@ Moodify.userprefs
 iOS/app.config
 Moodify/app.config
 Droid/app.config
+Droid/Resources/Resource.designer.cs
+Droid/Moodify.Droid.csproj.user
