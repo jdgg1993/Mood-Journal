@@ -22,5 +22,17 @@ namespace Moodify
         {
             get { return client; }
         }
+
+        public static AzureManager DefaultManager
+        {
+            get
+            {
+                return defaultInstance;
+            }
+            private set
+            {
+                defaultInstance = value;
+            }
+        }
     }
 }
