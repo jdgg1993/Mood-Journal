@@ -1,11 +1,13 @@
-﻿using Xamarin.Forms;
+﻿using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Moodify
 {
 	public partial class App : Application
 	{
-		
-		public static NavigationPage NavigationPage { get; private set; }
+
+        public static IAuthenticate Authenticator { get; private set; }
+        public static NavigationPage NavigationPage { get; private set; }
 		private static RootPage RootPage;
 
         public static string ApplicationURL = @"https://mojournal.azurewebsites.net";
@@ -47,5 +49,15 @@ namespace Moodify
 		{
 			// Handle when your app resumes
 		}
-	}
+
+        public interface IAuthenticate
+        {
+            Task<bool> Authenticate();
+        }
+
+        public static void Init(IAuthenticate authenticator)
+        {
+            Authenticator = authenticator;
+        }
+    }
 }
