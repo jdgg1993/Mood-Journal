@@ -10,12 +10,34 @@ namespace Moodify
 {
 	public partial class HomePage : ContentPage
 	{
-		public HomePage()
+
+        bool authenticated = false;
+
+        public HomePage()
 		{
 			InitializeComponent();
 		}
 
-		private async void TakePicture_Clicked(object sender, System.EventArgs e)
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (authenticated == true)
+            {
+                this.loginButton.IsVisible = false;
+            }
+        }
+
+        async void loginButton_Clicked(object sender, EventArgs e)
+        {
+            if (App.Authenticator != null)
+                authenticated = await App.Authenticator.Authenticate();
+
+            if (authenticated == true)
+                this.loginButton.IsVisible = false;
+        }
+
+        private async void TakePicture_Clicked(object sender, System.EventArgs e)
 		{
 			await CrossMedia.Current.Initialize();
 
