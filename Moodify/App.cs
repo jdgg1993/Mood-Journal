@@ -8,7 +8,9 @@ namespace Moodify
 		public static NavigationPage NavigationPage { get; private set; }
 		private static RootPage RootPage;
 
-		public static bool MenuIsPresented
+        public static string ApplicationURL = @"https://mojournal.azurewebsites.net";
+
+        public static bool MenuIsPresented
 		{
 			get
 			{
