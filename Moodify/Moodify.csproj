@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureManager.cs" />
+    <Compile Include="Data\TimelineDatabase.cs" />
+    <Compile Include="ISQLite.cs" />
+    <Compile Include="Model\Timeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App.cs" />
     <Compile Include="ViewModels\MenuPageViewModel.cs" />
