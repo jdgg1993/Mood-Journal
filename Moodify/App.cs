@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Moodify.Data;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Moodify
@@ -11,6 +12,7 @@ namespace Moodify
 		private static RootPage RootPage;
 
         public static string ApplicationURL = @"https://mojournal.azurewebsites.net";
+        static TimelineDatabase database;
 
         public static bool MenuIsPresented
 		{
@@ -58,6 +60,18 @@ namespace Moodify
         public static void Init(IAuthenticate authenticator)
         {
             Authenticator = authenticator;
+        }
+
+        public static TimelineDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new TimelineDatabase();
+                }
+                return database;
+            }
         }
     }
 }
