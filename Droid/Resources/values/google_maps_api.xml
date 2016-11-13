@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow the steps in this link: 
+
+	https://developer.xamarin.com/guides/android/platform_features/maps_and_location/maps/obtaining_a_google_maps_api_key/
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR-API-KEY</string>
+</resources>
