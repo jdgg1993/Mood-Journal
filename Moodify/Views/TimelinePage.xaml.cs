@@ -14,5 +14,12 @@ namespace Moodify.Views
         {
             InitializeComponent();
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            TimelineView.ItemsSource = App.Database.GetItems();
+        }
     }
 }
