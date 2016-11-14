@@ -16,7 +16,6 @@ namespace Moodify
 			GoHomeCommand = new Command(GoHome);
 			GoSecondCommand = new Command(GoSecond);
             GoTimelineCommand = new Command(GoTimeline);
-
         }
 
 		void GoHome(object obj)
