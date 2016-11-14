@@ -9,7 +9,7 @@ namespace Moodify
 
         public static IAuthenticate Authenticator { get; private set; }
         public static NavigationPage NavigationPage { get; private set; }
-		private static RootPage RootPage;
+		public static RootPage RootPage;
 
         public static string ApplicationURL = @"https://mojournal.azurewebsites.net";
         static TimelineDatabase database;
