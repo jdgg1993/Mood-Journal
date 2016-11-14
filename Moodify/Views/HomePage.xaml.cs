@@ -5,6 +5,8 @@ using System.Net.Http.Headers;
 using Plugin.Media;
 using Xamarin.Forms;
 using Microsoft.ProjectOxford.Emotion;
+using Moodify.Model;
+using System.Diagnostics;
 
 namespace Moodify
 {
@@ -60,25 +62,46 @@ namespace Moodify
 
 			UploadingIndicator.IsRunning = true;
 
-			string emotionKey = "88f748eefd944a5d8d337a1765414bba";
+            try
+            {
 
-			EmotionServiceClient emotionClient = new EmotionServiceClient(emotionKey);
+                string emotionKey = "88f748eefd944a5d8d337a1765414bba";
 
-			var emotionResults = await emotionClient.RecognizeAsync(file.GetStream());
+                EmotionServiceClient emotionClient = new EmotionServiceClient(emotionKey);
 
-			UploadingIndicator.IsRunning = false;
+                var emotionResults = await emotionClient.RecognizeAsync(file.GetStream());
 
-			foreach (var type in emotionResults)
-			{
-				EmotionView.ItemsSource = type.Scores.ToRankedList();
-			}
+                UploadingIndicator.IsRunning = false;
 
-			image.Source = ImageSource.FromStream(() =>
-			{
-				var stream = file.GetStream();
-				file.Dispose();
-				return stream;
-			});
+                var temp = emotionResults[0].Scores;
+                Timeline emo = new Timeline()
+                {
+                    Anger = temp.Anger,
+                    Contempt = temp.Contempt,
+                    Disgust = temp.Disgust,
+                    Fear = temp.Fear,
+                    Happiness = temp.Happiness,
+                    Neutral = temp.Neutral,
+                    Sadness = temp.Sadness,
+                    Surprise = temp.Surprise,
+                    createdAt = DateTime.Now
+                };
+
+                EmotionView.ItemsSource = temp.ToRankedList();
+
+                App.Database.SaveItem(emo);
+
+                image.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
+            }
+            catch (Exception ex)
+            {
+                errorLabel.Text = ex.Message;
+            }
 		}
 	}
 }
