@@ -41,7 +41,7 @@ namespace Moodify.Data
         {
             lock (locker)
             {
-                return database.Table<Timeline>().FirstOrDefault(x => x.ID == id);
+                return database.Table<Timeline>().FirstOrDefault(x => x.id == id);
             }
         }
 
@@ -49,10 +49,10 @@ namespace Moodify.Data
         {
             lock (locker)
             {
-                if (item.ID != 0)
+                if (item.id != 0)
                 {
                     database.Update(item);
-                    return item.ID;
+                    return item.id;
                 }
                 else
                 {
