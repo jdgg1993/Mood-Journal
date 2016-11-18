@@ -26,26 +26,21 @@ namespace Moodify
         {
             base.OnAppearing();
 
-            this.loginButton.IsVisible = false;
+            string userId = CrossSettings.Current.GetValueOrDefault("user", "");
+            string token = CrossSettings.Current.GetValueOrDefault("token", "");
 
-            try
+            if (!token.Equals("") || !userId.Equals(""))
             {
-                MobileServiceUser user = new MobileServiceUser(CrossSettings.Current.GetValueOrDefault("user", ""));
-                user.MobileServiceAuthenticationToken = CrossSettings.Current.GetValueOrDefault("token", "");
+                MobileServiceUser user = new MobileServiceUser(userId);
+                user.MobileServiceAuthenticationToken = token;
 
                 AzureManager.DefaultManager.CurrentClient.CurrentUser = user;
 
-                this.loginButton.IsVisible = false;
-            }
-            catch
-            {
-                this.loginButton.IsVisible = true;
+                authenticated = true;
             }
 
             if (authenticated == true)
-            {
                 this.loginButton.IsVisible = false;
-            }
         }
 
         async void loginButton_Clicked(object sender, EventArgs e)
@@ -58,7 +53,6 @@ namespace Moodify
                 this.loginButton.IsVisible = false;
                 CrossSettings.Current.AddOrUpdateValue("user", AzureManager.DefaultManager.CurrentClient.CurrentUser.UserId);
                 CrossSettings.Current.AddOrUpdateValue("token", AzureManager.DefaultManager.CurrentClient.CurrentUser.MobileServiceAuthenticationToken);
-
             }
         }
 
@@ -88,6 +82,8 @@ namespace Moodify
             try
             {
 
+                errorLabel.Text = "";
+
                 string emotionKey = "88f748eefd944a5d8d337a1765414bba";
 
                 EmotionServiceClient emotionClient = new EmotionServiceClient(emotionKey);
@@ -99,18 +95,20 @@ namespace Moodify
                 var temp = emotionResults[0].Scores;
                 Timeline emo = new Timeline()
                 {
-                    Anger = temp.Anger,
-                    Contempt = temp.Contempt,
-                    Disgust = temp.Disgust,
-                    Fear = temp.Fear,
-                    Happiness = temp.Happiness,
-                    Neutral = temp.Neutral,
-                    Sadness = temp.Sadness,
-                    Surprise = temp.Surprise,
+                    anger = temp.Anger,
+                    contempt = temp.Contempt,
+                    disgust = temp.Disgust,
+                    fear = temp.Fear,
+                    happiness = temp.Happiness,
+                    neutral = temp.Neutral,
+                    sadness = temp.Sadness,
+                    surprise = temp.Surprise,
                     createdAt = DateTime.Now
                 };
 
                 EmotionView.ItemsSource = temp.ToRankedList();
+
+                AzureManager.DefaultManager.CurrentClient.InvokeApiAsync<Timeline, string>("moodRecord", emo);
 
                 App.Database.SaveItem(emo);
 
