@@ -7,6 +7,8 @@ using Xamarin.Forms;
 using Microsoft.ProjectOxford.Emotion;
 using Moodify.Model;
 using System.Diagnostics;
+using Microsoft.WindowsAzure.MobileServices;
+using Plugin.Settings;
 
 namespace Moodify
 {
@@ -24,6 +26,22 @@ namespace Moodify
         {
             base.OnAppearing();
 
+            this.loginButton.IsVisible = false;
+
+            try
+            {
+                MobileServiceUser user = new MobileServiceUser(CrossSettings.Current.GetValueOrDefault("user", ""));
+                user.MobileServiceAuthenticationToken = CrossSettings.Current.GetValueOrDefault("token", "");
+
+                AzureManager.DefaultManager.CurrentClient.CurrentUser = user;
+
+                this.loginButton.IsVisible = false;
+            }
+            catch
+            {
+                this.loginButton.IsVisible = true;
+            }
+
             if (authenticated == true)
             {
                 this.loginButton.IsVisible = false;
@@ -36,7 +54,12 @@ namespace Moodify
                 authenticated = await App.Authenticator.Authenticate();
 
             if (authenticated == true)
+            {
                 this.loginButton.IsVisible = false;
+                CrossSettings.Current.AddOrUpdateValue("user", AzureManager.DefaultManager.CurrentClient.CurrentUser.UserId);
+                CrossSettings.Current.AddOrUpdateValue("token", AzureManager.DefaultManager.CurrentClient.CurrentUser.MobileServiceAuthenticationToken);
+
+            }
         }
 
         private async void TakePicture_Clicked(object sender, System.EventArgs e)
