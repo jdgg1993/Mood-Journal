@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Moodify.Data;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Moodify
@@ -8,9 +9,10 @@ namespace Moodify
 
         public static IAuthenticate Authenticator { get; private set; }
         public static NavigationPage NavigationPage { get; private set; }
-		private static RootPage RootPage;
+		public static RootPage RootPage;
 
         public static string ApplicationURL = @"https://mojournal.azurewebsites.net";
+        static TimelineDatabase database;
 
         public static bool MenuIsPresented
 		{
@@ -33,7 +35,7 @@ namespace Moodify
 			RootPage.Master = menuPage;
 			RootPage.Detail = NavigationPage;
 			MainPage = RootPage;
-		}
+        }
 
 		protected override void OnStart()
 		{
@@ -58,6 +60,18 @@ namespace Moodify
         public static void Init(IAuthenticate authenticator)
         {
             Authenticator = authenticator;
+        }
+
+        public static TimelineDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new TimelineDatabase();
+                }
+                return database;
+            }
         }
     }
 }
