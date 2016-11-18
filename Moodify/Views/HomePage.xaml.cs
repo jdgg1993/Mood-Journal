@@ -5,8 +5,9 @@ using System.Net.Http.Headers;
 using Plugin.Media;
 using Xamarin.Forms;
 using Microsoft.ProjectOxford.Emotion;
-using Moodify.Model;
+using Plugin.Settings;
 using System.Diagnostics;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace Moodify
 {
@@ -18,11 +19,27 @@ namespace Moodify
         public HomePage()
 		{
 			InitializeComponent();
-		}
+        }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            
+            this.loginButton.IsVisible = false;
+
+            try
+            {
+                MobileServiceUser user = new MobileServiceUser(CrossSettings.Current.GetValueOrDefault("user", ""));
+                user.MobileServiceAuthenticationToken = CrossSettings.Current.GetValueOrDefault("token", "");
+
+                AzureManager.DefaultManager.CurrentClient.CurrentUser = user;
+
+                this.loginButton.IsVisible = false;
+            }
+            catch
+            {
+                this.loginButton.IsVisible = true;
+            }
 
             if (authenticated == true)
             {
@@ -36,7 +53,11 @@ namespace Moodify
                 authenticated = await App.Authenticator.Authenticate();
 
             if (authenticated == true)
+            {
                 this.loginButton.IsVisible = false;
+                CrossSettings.Current.AddOrUpdateValue("user", AzureManager.DefaultManager.CurrentClient.CurrentUser.UserId);
+                CrossSettings.Current.AddOrUpdateValue("token", AzureManager.DefaultManager.CurrentClient.CurrentUser.MobileServiceAuthenticationToken);
+            }
         }
 
         private async void TakePicture_Clicked(object sender, System.EventArgs e)
@@ -62,46 +83,25 @@ namespace Moodify
 
 			UploadingIndicator.IsRunning = true;
 
-            try
-            {
+			string emotionKey = "88f748eefd944a5d8d337a1765414bba";
 
-                string emotionKey = "88f748eefd944a5d8d337a1765414bba";
+			EmotionServiceClient emotionClient = new EmotionServiceClient(emotionKey);
 
-                EmotionServiceClient emotionClient = new EmotionServiceClient(emotionKey);
+			var emotionResults = await emotionClient.RecognizeAsync(file.GetStream());
 
-                var emotionResults = await emotionClient.RecognizeAsync(file.GetStream());
+			UploadingIndicator.IsRunning = false;
 
-                UploadingIndicator.IsRunning = false;
+			foreach (var type in emotionResults)
+			{
+				EmotionView.ItemsSource = type.Scores.ToRankedList();
+			}
 
-                var temp = emotionResults[0].Scores;
-                Timeline emo = new Timeline()
-                {
-                    Anger = temp.Anger,
-                    Contempt = temp.Contempt,
-                    Disgust = temp.Disgust,
-                    Fear = temp.Fear,
-                    Happiness = temp.Happiness,
-                    Neutral = temp.Neutral,
-                    Sadness = temp.Sadness,
-                    Surprise = temp.Surprise,
-                    createdAt = DateTime.Now
-                };
-
-                EmotionView.ItemsSource = temp.ToRankedList();
-
-                App.Database.SaveItem(emo);
-
-                image.Source = ImageSource.FromStream(() =>
-                {
-                    var stream = file.GetStream();
-                    file.Dispose();
-                    return stream;
-                });
-            }
-            catch (Exception ex)
-            {
-                errorLabel.Text = ex.Message;
-            }
+			image.Source = ImageSource.FromStream(() =>
+			{
+				var stream = file.GetStream();
+				file.Dispose();
+				return stream;
+			});
 		}
 	}
 }
