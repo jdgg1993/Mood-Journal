@@ -18,34 +18,34 @@ namespace Moodify.Data
         public TimelineDatabase()
         {
             database = DependencyService.Get<ISQLite>().GetConnection();
-            database.CreateTable<Timeline>();
+            database.CreateTable<Emotion>();
         }
 
-        public IEnumerable<Timeline> GetItems()
+        public IEnumerable<Emotion> GetItems()
         {
             lock (locker)
             {
-                return (from i in database.Table<Timeline>() select i).ToList();
+                return (from i in database.Table<Emotion>() select i).ToList();
             }
         }
 
-        public IEnumerable<Timeline> GetItemsNotDone()
+        public IEnumerable<Emotion> GetItemsNotDone()
         {
             lock (locker)
             {
-                return database.Query<Timeline>("SELECT * FROM [Timeline] WHERE [Done] = 0");
+                return database.Query<Emotion>("SELECT * FROM [Timeline] WHERE [Done] = 0");
             }
         }
 
-        public Timeline GetItem(int id)
+        public Emotion GetItem(int id)
         {
             lock (locker)
             {
-                return database.Table<Timeline>().FirstOrDefault(x => x.id == id);
+                return database.Table<Emotion>().FirstOrDefault(x => x.id == id);
             }
         }
 
-        public int SaveItem(Timeline item)
+        public int SaveItem(Emotion item)
         {
             lock (locker)
             {
@@ -65,7 +65,7 @@ namespace Moodify.Data
         {
             lock (locker)
             {
-                return database.Delete<Timeline>(id);
+                return database.Delete<Emotion>(id);
             }
         }
     }
