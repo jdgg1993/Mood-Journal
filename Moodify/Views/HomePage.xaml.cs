@@ -93,7 +93,7 @@ namespace Moodify
                 UploadingIndicator.IsRunning = false;
 
                 var temp = emotionResults[0].Scores;
-                Timeline emo = new Timeline()
+                Emotion emo = new Emotion()
                 {
                     anger = temp.Anger,
                     contempt = temp.Contempt,
@@ -108,7 +108,7 @@ namespace Moodify
 
                 EmotionView.ItemsSource = temp.ToRankedList();
 
-                AzureManager.DefaultManager.CurrentClient.InvokeApiAsync<Timeline, string>("moodRecord", emo);
+                AzureManager.DefaultManager.CurrentClient.InvokeApiAsync<Emotion, string>("moodRecord", emo);
 
                 App.Database.SaveItem(emo);
 
