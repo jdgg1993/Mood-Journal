@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Moodify.Model;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 
 namespace Moodify.Views
@@ -19,7 +21,13 @@ namespace Moodify.Views
         {
             base.OnAppearing();
 
-            TimelineView.ItemsSource = App.Database.GetItems();
+            //TimelineView.ItemsSource = App.Database.GetItems();
+            
+            //var result = await AzureManager.DefaultManager.CurrentClient.InvokeApiAsync("moodRecord", HttpMethod.Get, null);
+
+            //Debug.WriteLine(result);
+
+            TimelineView.ItemsSource = await AzureManager.DefaultManager.GetTodoItemsAsync(true);
         }
     }
 }
