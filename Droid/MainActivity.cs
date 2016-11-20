@@ -29,6 +29,8 @@ namespace Moodify.Droid
 
             App.Init((IAuthenticate)this);
 
+            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+
             LoadApplication(new App());
 		}
 
