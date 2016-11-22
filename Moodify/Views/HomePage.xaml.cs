@@ -29,7 +29,7 @@ namespace Moodify
             string userId = CrossSettings.Current.GetValueOrDefault("user", "");
             string token = CrossSettings.Current.GetValueOrDefault("token", "");
 
-            if (!token.Equals("") || !userId.Equals(""))
+            if (!token.Equals("") && !userId.Equals(""))
             {
                 MobileServiceUser user = new MobileServiceUser(userId);
                 user.MobileServiceAuthenticationToken = token;
